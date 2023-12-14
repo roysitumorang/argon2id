@@ -20,7 +20,7 @@ func main() {
 	// provided algorithm parameters. The returned hash follows the format used
 	// by the Argon2 reference C implementation and looks like this:
 	// $argon2id$v=19$m=65536,t=3,p=2$c29tZXNhbHQ$RdescudvJCsgt3ub+b+dWRWJTmaaJObG
-	hash, err := argon2id.CreateHash("pa$$word", argon2id.DefaultParams)
+	hash, err := argon2id.CreateHash([]byte("pa$$word"), argon2id.DefaultParams)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -29,7 +29,7 @@ func main() {
 	// plain-text password and Argon2id hash, using the parameters and salt
 	// contained in the hash. It returns true if they match, otherwise it returns
 	// false.
-	match, err := argon2id.ComparePasswordAndHash("pa$$word", hash)
+	match, err := argon2id.ComparePasswordAndHash([]byte("pa$$word"), hash)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,7 +62,7 @@ params := &argon2id.Params{
 }
 
 
-hash, err := argon2id.CreateHash("pa$$word", params)
+hash, err := argon2id.CreateHash([]byte("pa$$word"), params)
 if err != nil {
 	log.Fatal(err)
 }
